@@ -3,108 +3,112 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI Adoption Readiness Checklist | Dan Paisley</title>
+<title>AI Adoption Readiness Checklist</title>
 <style>
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; background: #0a0a0a; color: #ffffff; min-height: 100vh; padding: 40px 20px; }
-  .page-wrap { max-width: 720px; margin: 0 auto; }
-
-  .page-header { margin-bottom: 48px; }
-  .page-header h1 { font-size: 36px; font-weight: 700; line-height: 1.2; margin-bottom: 12px; }
-  .page-header p { font-size: 17px; color: #999; line-height: 1.6; }
-  .page-header .accent { color: #409CFF; }
-
-  .checklist-card { background: #111; border: 1px solid #222; border-radius: 12px; padding: 32px; margin-bottom: 24px; }
-
-  .q-item { display: flex; align-items: flex-start; gap: 16px; padding: 18px 0; border-bottom: 1px solid #1e1e1e; }
-  .q-item:last-of-type { border-bottom: none; padding-bottom: 0; }
-  .q-num { font-size: 12px; color: #555; min-width: 20px; padding-top: 3px; font-weight: 500; }
-  .q-text { flex: 1; font-size: 15px; color: #ddd; line-height: 1.6; }
-  .q-btns { display: flex; gap: 8px; padding-top: 2px; }
-  .q-btn { padding: 6px 18px; border-radius: 6px; border: 1px solid #333; background: transparent; font-size: 13px; cursor: pointer; color: #888; transition: all 0.15s; font-weight: 500; }
-  .q-btn:hover { border-color: #555; color: #ccc; }
-  .q-btn.yes.active { background: #0a2a1a; border-color: #1D9E75; color: #5DCAA5; }
-  .q-btn.no.active { background: #2a0a0a; border-color: #E24B4A; color: #F09595; }
-
-  .score-section { background: #111; border: 1px solid #222; border-radius: 12px; padding: 32px; margin-bottom: 24px; }
-  .score-top { display: flex; align-items: baseline; gap: 8px; margin-bottom: 8px; }
-  .score-num { font-size: 56px; font-weight: 700; line-height: 1; color: #fff; }
-  .score-denom { font-size: 24px; color: #555; }
-  .score-label { font-size: 14px; color: #666; margin-bottom: 16px; }
-  .progress-bar { height: 6px; border-radius: 3px; background: #222; overflow: hidden; margin-bottom: 24px; }
-  .progress-fill { height: 100%; border-radius: 3px; transition: width 0.4s ease, background 0.4s ease; width: 0%; background: #409CFF; }
-
-  .score-band { border-radius: 8px; padding: 20px 24px; display: none; margin-bottom: 24px; }
-  .band-checkmark { background: #1a0808; border: 1px solid #5a1a1a; }
-  .band-gray { background: #1a1200; border: 1px solid #5a4000; }
-  .band-adoptco { background: #041a0e; border: 1px solid #0a5a2a; }
-  .band-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; }
-  .band-checkmark .band-title { color: #F09595; }
-  .band-gray .band-title { color: #FAC775; }
-  .band-adoptco .band-title { color: #5DCAA5; }
-  .band-body { font-size: 14px; line-height: 1.7; color: #aaa; }
-
-  .form-section { background: #111; border: 1px solid #222; border-radius: 12px; padding: 32px; display: none; }
-  .form-section h2 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
-  .form-section p { font-size: 14px; color: #888; margin-bottom: 24px; line-height: 1.6; }
-  .form-group { margin-bottom: 16px; }
-  .form-group label { display: block; font-size: 13px; color: #888; margin-bottom: 6px; }
-  .form-group input { width: 100%; padding: 12px 16px; background: #0a0a0a; border: 1px solid #333; border-radius: 8px; color: #fff; font-size: 15px; outline: none; transition: border-color 0.15s; }
-  .form-group input:focus { border-color: #409CFF; }
-  .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-  .submit-btn { width: 100%; padding: 14px; background: #409CFF; border: none; border-radius: 8px; color: #fff; font-size: 16px; font-weight: 700; cursor: pointer; transition: background 0.15s; margin-top: 8px; }
-  .submit-btn:hover { background: #5aaeff; }
-  .privacy { font-size: 12px; color: #555; margin-top: 12px; text-align: center; }
-
-  .thank-you { display: none; text-align: center; padding: 32px; }
-  .thank-you h2 { font-size: 24px; font-weight: 700; margin-bottom: 12px; }
-  .thank-you p { font-size: 15px; color: #888; line-height: 1.7; }
-
-  .reset-btn { background: none; border: none; color: #555; font-size: 13px; cursor: pointer; text-decoration: underline; padding: 0; margin-top: 8px; }
+  body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif; background: #F4F3F0; color: #1a1a1a; min-height: 100vh; padding: 48px 20px; }
+  .page-wrap { max-width: 700px; margin: 0 auto; }
+  .hud-bar { display: flex; align-items: center; justify-content: space-between; padding: 10px 16px; border: 1px solid #ddd; border-radius: 6px; background: #fff; margin-bottom: 32px; }
+  .hud-label { font-size: 11px; font-weight: 600; letter-spacing: 0.12em; text-transform: uppercase; color: #888; }
+  .hud-indicator { display: flex; align-items: center; gap: 6px; }
+  .hud-dot { width: 7px; height: 7px; border-radius: 50%; background: #ccc; transition: background 0.3s; }
+  .hud-dot.active { background: #2C5F8A; }
+  .hud-progress-text { font-size: 11px; color: #999; letter-spacing: 0.05em; }
+  .page-header { margin-bottom: 32px; }
+  .page-header h1 { font-size: 30px; font-weight: 600; line-height: 1.25; color: #111; margin-bottom: 10px; letter-spacing: -0.02em; }
+  .page-header p { font-size: 15px; color: #666; line-height: 1.65; max-width: 580px; }
+  .checklist-card { background: #fff; border: 1px solid #e0e0e0; border-radius: 10px; padding: 8px 0; margin-bottom: 20px; }
+  .q-item { display: flex; align-items: flex-start; gap: 16px; padding: 16px 24px; border-bottom: 1px solid #f0f0f0; transition: background 0.1s; }
+  .q-item:last-of-type { border-bottom: none; }
+  .q-item.answered { background: #fafafa; }
+  .q-num { font-size: 11px; color: #bbb; min-width: 18px; padding-top: 3px; font-weight: 600; letter-spacing: 0.05em; }
+  .q-text { flex: 1; font-size: 14px; color: #333; line-height: 1.6; }
+  .q-btns { display: flex; gap: 6px; padding-top: 1px; }
+  .q-btn { padding: 5px 16px; border-radius: 4px; border: 1px solid #ddd; background: #fff; font-size: 12px; font-weight: 500; cursor: pointer; color: #777; transition: all 0.12s; letter-spacing: 0.03em; }
+  .q-btn:hover { border-color: #aaa; color: #333; }
+  .q-btn.yes.active { background: #EAF4EE; border-color: #5AA876; color: #2A6B40; }
+  .q-btn.no.active { background: #FDF0EE; border-color: #D4856A; color: #8A3820; }
+  .score-section { background: #fff; border: 1px solid #e0e0e0; border-radius: 10px; padding: 28px; margin-bottom: 20px; }
+  .score-display { display: flex; align-items: flex-end; gap: 24px; margin-bottom: 20px; padding-bottom: 20px; border-bottom: 1px solid #f0f0f0; }
+  .score-number-wrap { display: flex; align-items: baseline; gap: 6px; }
+  .score-num { font-size: 52px; font-weight: 300; color: #111; line-height: 1; letter-spacing: -0.03em; transition: color 0.4s; }
+  .score-denom { font-size: 20px; color: #ccc; font-weight: 300; }
+  .score-meta { flex: 1; }
+  .score-status { font-size: 11px; font-weight: 600; letter-spacing: 0.1em; text-transform: uppercase; color: #aaa; margin-bottom: 8px; }
+  .tick-row { display: flex; gap: 4px; align-items: center; }
+  .tick { width: 18px; height: 4px; border-radius: 2px; background: #eee; transition: background 0.3s; }
+  .tick.filled-yes { background: #5AA876; }
+  .tick.filled-no { background: #D4856A; }
+  .score-bar-wrap { height: 3px; background: #eee; border-radius: 2px; overflow: hidden; margin-top: 10px; }
+  .score-bar-fill { height: 100%; border-radius: 2px; transition: width 0.4s ease, background 0.4s ease; width: 0%; }
+  .score-band { border-radius: 6px; padding: 16px 20px; display: none; margin-top: 20px; }
+  .band-at-risk { background: #FDF0EE; border: 1px solid #EABCB0; }
+  .band-building { background: #FFFAED; border: 1px solid #E8D48A; }
+  .band-thriving { background: #EAF4EE; border: 1px solid #94CCA8; }
+  .band-header { display: flex; align-items: center; gap: 10px; margin-bottom: 8px; }
+  .band-tag { font-size: 10px; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase; padding: 3px 8px; border-radius: 3px; }
+  .band-at-risk .band-tag { background: #D4856A; color: #fff; }
+  .band-building .band-tag { background: #C4A020; color: #fff; }
+  .band-thriving .band-tag { background: #5AA876; color: #fff; }
+  .band-title { font-size: 15px; font-weight: 600; color: #111; }
+  .band-body { font-size: 13px; line-height: 1.7; color: #555; }
+  .reset-btn { background: none; border: none; color: #bbb; font-size: 12px; cursor: pointer; padding: 0; margin-top: 16px; display: block; letter-spacing: 0.03em; }
   .reset-btn:hover { color: #888; }
-
-  .progress-indicator { font-size: 13px; color: #555; margin-bottom: 24px; }
-  .progress-indicator span { color: #409CFF; font-weight: 500; }
+  .form-section { background: #fff; border: 1px solid #e0e0e0; border-radius: 10px; padding: 28px; display: none; }
+  .form-header { margin-bottom: 20px; }
+  .form-header h2 { font-size: 18px; font-weight: 600; color: #111; margin-bottom: 6px; }
+  .form-header p { font-size: 13px; color: #888; line-height: 1.6; }
+  .thank-you { display: none; text-align: center; padding: 40px 20px; background: #fff; border: 1px solid #e0e0e0; border-radius: 10px; }
+  .thank-you h2 { font-size: 20px; font-weight: 600; margin-bottom: 10px; color: #111; }
+  .thank-you p { font-size: 14px; color: #777; line-height: 1.7; }
+  .page-footer { margin-top: 32px; text-align: center; font-size: 11px; color: #bbb; letter-spacing: 0.05em; }
 </style>
 </head>
 <body>
 <div class="page-wrap">
-
-  <div class="page-header">
-    <h1>AI Adoption <span class="accent">Readiness</span> Checklist</h1>
-    <p>Ten honest questions for executives who want to know where their organization actually stands. Takes under five minutes. No right or wrong answers — just honest ones.</p>
+  <div class="hud-bar">
+    <span class="hud-label">AI Adoption Readiness</span>
+    <div class="hud-indicator">
+      <div class="hud-dot" id="hud-dot"></div>
+      <span class="hud-progress-text" id="hud-text">0 / 10 answered</span>
+    </div>
   </div>
-
+  <div class="page-header">
+    <h1>Where does your organization actually stand on AI adoption?</h1>
+    <p>Ten honest questions for executives. Takes under five minutes. No right or wrong answers — just an accurate picture of where you are today.</p>
+  </div>
   <div class="checklist-card">
-    <p class="progress-indicator"><span id="answered-count">0</span> of 10 answered</p>
     <div id="questions"></div>
   </div>
-
   <div class="score-section">
-    <div class="score-top">
-      <span class="score-num" id="score-num">0</span>
-      <span class="score-denom">/ 10</span>
+    <div class="score-display">
+      <div class="score-number-wrap">
+        <span class="score-num" id="score-num">—</span>
+        <span class="score-denom">/ 10</span>
+      </div>
+      <div class="score-meta">
+        <div class="score-status" id="score-status">Awaiting responses</div>
+        <div class="tick-row" id="tick-row"></div>
+        <div class="score-bar-wrap"><div class="score-bar-fill" id="score-bar"></div></div>
+      </div>
     </div>
-    <p class="score-label" id="score-label">Answer the questions above to see your score</p>
-    <div class="progress-bar"><div class="progress-fill" id="progress-fill"></div></div>
     <div class="score-band" id="score-band"></div>
     <button class="reset-btn" onclick="resetAll()">Start over</button>
   </div>
-
   <div class="form-section" id="form-section">
-    <h2>Want more tools like this one?</h2>
-    <p>Drop your details below and I will send you practical resources on AI adoption, governance, and visibility as I build them out. No spam. No pitch sequence.</p>
+    <div class="form-header">
+      <h2>Want more tools like this one?</h2>
+      <p>Drop your details below and I will send you practical resources on AI adoption, governance, and visibility as I build them out. No spam. No pitch sequence.</p>
+    </div>
     <script src="https://js-na3.hsforms.net/forms/embed/342984064.js" defer></script>
     <div class="hs-form-frame" data-region="na3" data-form-id="eddb9929-c323-4861-bf37-b311ed4af644" data-portal-id="342984064"></div>
   </div>
-
   <div class="thank-you" id="thank-you">
     <h2>You are all set.</h2>
-    <p>Your results are on their way. If you want to talk through what you found — or compare notes on what good actually looks like in practice — send me a message on LinkedIn. No agenda. Just a real conversation.</p>
+    <p>Keep an eye on your inbox. If you want to talk through what you found, send a message on LinkedIn. No agenda — just a real conversation.</p>
   </div>
-
+  <div class="page-footer">A3 by Xennial Innovations</div>
 </div>
-
 <script>
 const questions = [
   "Can anyone in your organization name a specific workflow that measurably improved because of AI?",
@@ -118,78 +122,56 @@ const questions = [
   "Have you identified workflows in your business where AI should not be used?",
   "Do you have a feedback loop between what employees are doing with AI and what leadership learns from it?"
 ];
-
 const answers = new Array(10).fill(null);
-
 function render() {
   const container = document.getElementById('questions');
   container.innerHTML = '';
   questions.forEach((q, i) => {
     const div = document.createElement('div');
-    div.className = 'q-item';
-    div.innerHTML = `
-      <span class="q-num">${i + 1}</span>
-      <span class="q-text">${q}</span>
-      <div class="q-btns">
-        <button class="q-btn yes ${answers[i] === true ? 'active' : ''}" onclick="answer(${i}, true)">Yes</button>
-        <button class="q-btn no ${answers[i] === false ? 'active' : ''}" onclick="answer(${i}, false)">No</button>
-      </div>`;
+    div.className = 'q-item' + (answers[i] !== null ? ' answered' : '');
+    div.innerHTML = `<span class="q-num">${String(i+1).padStart(2,'0')}</span><span class="q-text">${q}</span><div class="q-btns"><button class="q-btn yes ${answers[i]===true?'active':''}" onclick="answer(${i},true)">Yes</button><button class="q-btn no ${answers[i]===false?'active':''}" onclick="answer(${i},false)">No</button></div>`;
     container.appendChild(div);
   });
   updateScore();
 }
-
-function answer(i, val) {
-  answers[i] = val;
-  render();
-}
-
+function answer(i, val) { answers[i] = val; render(); }
 function updateScore() {
   const answered = answers.filter(a => a !== null).length;
   const score = answers.filter(a => a === true).length;
   const pct = Math.round((score / 10) * 100);
-
-  document.getElementById('answered-count').textContent = answered;
-  document.getElementById('score-num').textContent = score;
-
-  const fill = document.getElementById('progress-fill');
-  fill.style.width = pct + '%';
-  fill.style.background = score <= 3 ? '#E24B4A' : score <= 6 ? '#EF9F27' : '#1D9E75';
-
+  document.getElementById('hud-text').textContent = answered + ' / 10 answered';
+  document.getElementById('hud-dot').className = 'hud-dot' + (answered === 10 ? ' active' : '');
+  const scoreEl = document.getElementById('score-num');
+  scoreEl.textContent = answered > 0 ? score : '—';
+  scoreEl.style.color = answered === 0 ? '#ccc' : score <= 3 ? '#C4603A' : score <= 6 ? '#C4A020' : '#3A8A5C';
+  document.getElementById('score-status').textContent = answered < 10 ? answered + ' of 10 answered' : 'Assessment complete';
+  const tickRow = document.getElementById('tick-row');
+  tickRow.innerHTML = '';
+  answers.forEach(a => {
+    const tick = document.createElement('div');
+    tick.className = 'tick' + (a === true ? ' filled-yes' : a === false ? ' filled-no' : '');
+    tickRow.appendChild(tick);
+  });
+  const bar = document.getElementById('score-bar');
+  bar.style.width = answered === 10 ? pct + '%' : (answered * 10) + '%';
+  bar.style.background = score <= 3 ? '#D4856A' : score <= 6 ? '#C4A020' : '#5AA876';
   const band = document.getElementById('score-band');
-  const label = document.getElementById('score-label');
   const formSection = document.getElementById('form-section');
-
-  if (answered < 10) {
-    label.textContent = answered + ' of 10 answered';
-    band.style.display = 'none';
-    formSection.style.display = 'none';
-    return;
-  }
-
-  label.textContent = 'All questions answered';
+  if (answered < 10) { band.style.display = 'none'; formSection.style.display = 'none'; return; }
   band.style.display = 'block';
   formSection.style.display = 'block';
-
   if (score <= 3) {
-    band.className = 'score-band band-checkmark';
-    band.innerHTML = '<div class="band-title">Checkmark territory — 0 to 3</div><div class="band-body">Your organization has purchased AI but the infrastructure to make it work is not yet in place. Visibility, governance, and adoption support are all gaps. The good news is that awareness is the first step and you now have a clear picture of where to start.</div>';
+    band.className = 'score-band band-at-risk';
+    band.innerHTML = '<div class="band-header"><span class="band-tag">At Risk</span><span class="band-title">The foundations are not yet in place</span></div><div class="band-body">Your organization has purchased AI but the infrastructure to make it work is missing. Visibility, governance, and adoption support are all gaps. The good news is that awareness is the first step — and you now have a clear picture of where to start.</div>';
   } else if (score <= 6) {
-    band.className = 'score-band band-gray';
-    band.innerHTML = '<div class="band-title">The gray zone — 4 to 6</div><div class="band-body">You have made progress but the foundations are uneven. Some pieces are in place and others are not. The gray zone is not stable — it drifts toward Checkmark or Adoptco based on the decisions leadership makes in the next 12 months.</div>';
+    band.className = 'score-band band-building';
+    band.innerHTML = '<div class="band-header"><span class="band-tag">Building</span><span class="band-title">Progress made, but the foundations are uneven</span></div><div class="band-body">Some pieces are in place and others are not. This is where most organizations sit right now. The question is which direction you drift from here — the decisions leadership makes in the next 12 months will determine the outcome.</div>';
   } else {
-    band.className = 'score-band band-adoptco';
-    band.innerHTML = '<div class="band-title">Adoptco territory — 7 to 10</div><div class="band-body">Your organization is treating AI adoption as an organizational capability, not just a tool purchase. You have visibility, governance, and the infrastructure to learn and improve. The challenge now is scaling what is working and staying ahead of what is coming.</div>';
+    band.className = 'score-band band-thriving';
+    band.innerHTML = '<div class="band-header"><span class="band-tag">Thriving</span><span class="band-title">AI adoption is being treated as a capability, not a checkbox</span></div><div class="band-body">You have visibility, governance, and the infrastructure to learn and improve. The challenge now is scaling what is working and staying ahead of what is coming. You are building something that will be hard for competitors to replicate.</div>';
   }
 }
-
-function resetAll() {
-  answers.fill(null);
-  document.getElementById('form-section').style.display = 'none';
-  document.getElementById('thank-you').style.display = 'none';
-  render();
-}
-
+function resetAll() { answers.fill(null); document.getElementById('form-section').style.display = 'none'; document.getElementById('thank-you').style.display = 'none'; render(); }
 render();
 </script>
 </body>
