@@ -55,9 +55,16 @@
   .reset-btn { background: none; border: none; color: #bbb; font-size: 12px; cursor: pointer; padding: 0; margin-top: 16px; display: block; letter-spacing: 0.03em; }
   .reset-btn:hover { color: #888; }
   .form-section { background: #fff; border: 1px solid #e0e0e0; border-radius: 10px; padding: 28px; display: none; }
-  .form-header { margin-bottom: 20px; }
+  .form-header { margin-bottom: 12px; }
   .form-header h2 { font-size: 18px; font-weight: 600; color: #111; margin-bottom: 6px; }
   .form-header p { font-size: 13px; color: #888; line-height: 1.6; }
+  .score-summary { display: flex; align-items: center; gap: 12px; padding: 12px 16px; border-radius: 6px; margin-bottom: 16px; background: #f9f9f9; border: 1px solid #eee; }
+  .score-summary-num { font-size: 28px; font-weight: 300; line-height: 1; }
+  .score-summary-detail { flex: 1; }
+  .score-summary-band { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; }
+  .score-summary-sub { font-size: 12px; color: #888; margin-top: 2px; }
+  .hs-form-frame { margin-top: 0 !important; padding-top: 0 !important; }
+  .hs-form-frame iframe { margin-top: 0 !important; }
   .thank-you { display: none; text-align: center; padding: 40px 20px; background: #fff; border: 1px solid #e0e0e0; border-radius: 10px; }
   .thank-you h2 { font-size: 20px; font-weight: 600; margin-bottom: 10px; color: #111; }
   .thank-you p { font-size: 14px; color: #777; line-height: 1.7; }
@@ -75,7 +82,7 @@
   </div>
   <div class="page-header">
     <h1>Where does your organization actually stand on AI adoption?</h1>
-    <p>Ten honest questions for executives. Takes under five minutes. No right or wrong answers, just an accurate picture of where you are today.</p>
+    <p>Ten honest questions for executives. Takes under five minutes. No right or wrong answers — just an accurate picture of where you are today.</p>
   </div>
   <div class="checklist-card">
     <div id="questions"></div>
@@ -99,6 +106,13 @@
     <div class="form-header">
       <h2>Want to talk through what you found?</h2>
       <p>I set aside time each week for conversations with leaders navigating this. No pitch — just a useful 15 minutes on where you are and what the next step looks like.</p>
+    </div>
+    <div class="score-summary" id="score-summary">
+      <span class="score-summary-num" id="summary-num" style="color:#aaa">—</span>
+      <div class="score-summary-detail">
+        <div class="score-summary-band" id="summary-band">Your result</div>
+        <div class="score-summary-sub" id="summary-sub">Complete the assessment above</div>
+      </div>
     </div>
     <script src="https://js-na3.hsforms.net/forms/embed/342984064.js" defer></script>
     <div class="hs-form-frame" data-region="na3" data-form-id="eddb9929-c323-4861-bf37-b311ed4af644" data-portal-id="342984064"></div>
@@ -160,13 +174,31 @@ function updateScore() {
   if (answered < 10) { band.style.display = 'none'; formSection.style.display = 'none'; return; }
   band.style.display = 'block';
   formSection.style.display = 'block';
+
+  const summaryNum = document.getElementById('summary-num');
+  const summaryBand = document.getElementById('summary-band');
+  const summarySub = document.getElementById('summary-sub');
+  summaryNum.textContent = score;
+
   if (score <= 3) {
+    summaryNum.style.color = '#C4603A';
+    summaryBand.textContent = 'At Risk';
+    summaryBand.style.color = '#C4603A';
+    summarySub.textContent = 'Score: ' + score + '/10 — The foundations are not yet in place';
     band.className = 'score-band band-at-risk';
     band.innerHTML = '<div class="band-header"><span class="band-tag">At Risk</span><span class="band-title">The foundations are not yet in place</span></div><div class="band-body">Your organization has purchased AI but the infrastructure to make it work is missing. Visibility, governance, and adoption support are all gaps. The good news is that awareness is the first step — and you now have a clear picture of where to start.</div>';
   } else if (score <= 6) {
+    summaryNum.style.color = '#C4A020';
+    summaryBand.textContent = 'Building';
+    summaryBand.style.color = '#C4A020';
+    summarySub.textContent = 'Score: ' + score + '/10 — Progress made, but the foundations are uneven';
     band.className = 'score-band band-building';
     band.innerHTML = '<div class="band-header"><span class="band-tag">Building</span><span class="band-title">Progress made, but the foundations are uneven</span></div><div class="band-body">Some pieces are in place and others are not. This is where most organizations sit right now. The question is which direction you drift from here — the decisions leadership makes in the next 12 months will determine the outcome.</div>';
   } else {
+    summaryNum.style.color = '#3A8A5C';
+    summaryBand.textContent = 'Thriving';
+    summaryBand.style.color = '#3A8A5C';
+    summarySub.textContent = 'Score: ' + score + '/10 — AI adoption is being treated as a capability';
     band.className = 'score-band band-thriving';
     band.innerHTML = '<div class="band-header"><span class="band-tag">Thriving</span><span class="band-title">AI adoption is being treated as a capability, not a checkbox</span></div><div class="band-body">You have visibility, governance, and the infrastructure to learn and improve. The challenge now is scaling what is working and staying ahead of what is coming. You are building something that will be hard for competitors to replicate.</div>';
   }
